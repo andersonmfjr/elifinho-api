@@ -5,7 +5,7 @@ const config = require('config');
 
 const { addRoutes } = require('./routes');
 
-const port = +process.env.PORT || 8080;
+const port = +process.env.PORT || config.port;
 const server = Hapi.server({
   port: port,
   host: 'localhost'

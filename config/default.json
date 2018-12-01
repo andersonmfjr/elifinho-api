@@ -1,4 +1,4 @@
 {
   "port": 8080,
-  "databaseUrl": "postgres://axrpbiauavhpkk:5ad4c387ad191cd88fe20cedace21866985cfc3934d6d68d72ea583eea70f19d@ec2-54-225-196-122.compute-1.amazonaws.com:5432/d9o39s9m09cart"
+  "databaseUrl": ""
 }
