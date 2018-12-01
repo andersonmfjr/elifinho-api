@@ -6,46 +6,47 @@ const Boom = require('boom');
 
 const index = async (request, h) => {
   const professores = await Professor.findAll({
-    attributes: ['id', 'name', 'email']
+    attributes: ['name', 'email', 'lastseen']
   });
   return { professores: professores };
 };
 
 const show = async (request, h) => {
-  try {
-    const id = request.params.id;
-    const professor = await Professor.findById(id, {
-      attributes: ['id', 'name', 'email']
-    });
+  const id = request.params.id.split('-').join(' ');
+  const professor = await Professor.findById(id, {
+    attributes: ['name', 'email', 'lastseen']
+  });
 
+  if (professor) {
     return { professor: professor };
-  } catch (e) {
-    return Boom.notFound(`Professor ${id} não encontrado > ${e}`);
+  } else {
+    return Boom.notFound(`Professor ${id} não encontrado`);
   }
 };
 
 const create = async (request, h) => {
-  try {
-    const attributes = {
-      name: request.payload.professor.name,
-      email: request.payload.professor.email,
-      lastSeen: request.payload.professor.lastSeen
-    };
-    const professor = await Professor.create(attributes);
+  const attributes = {
+    name: request.payload.professor.name,
+    email: request.payload.professor.email,
+    lastseen: request.payload.professor.lastseen
+  };
 
+  const professor = await Professor.create(attributes);
+
+  if (professor) {
     return { professor: professor };
-  } catch (e) {
-    console.log(e);
-    return Boom.badImplementation();
+  } else {
+    return { professor: professor };
   }
 };
 
 const update = async (request, h) => {
   try {
-    const professor = await Professor.findById(request.params.id);
+    const id = request.params.id.split('-').join(' ');
+    const professor = await Professor.findById(id);
 
     const attributes = R.pick(
-      ['name', 'email', 'lastSeen'],
+      ['name', 'email', 'lastseen'],
       request.payload.professor
     );
 
@@ -54,7 +55,7 @@ const update = async (request, h) => {
 
     return { professor: professor };
   } catch (e) {
-    return;
+    return `Error > ${e}`;
   }
 };
 
@@ -66,7 +67,7 @@ const destroy = async (request, h) => {
 
     return {};
   } catch (e) {
-    return;
+    return `Error > ${e}`;
   }
 };
 

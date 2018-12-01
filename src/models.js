@@ -2,31 +2,36 @@
 
 const config = require('config');
 const Sequelize = require('sequelize');
+const pg = require('pg');
+pg.defaults.ssl = true;
 
 const databaseUrl = config.databaseUrl;
 const Op = Sequelize.Op;
 const sequelize = new Sequelize(databaseUrl, {
   underscoredAll: true,
-  operatorsAliases: Op
+  operatorsAliases: Op,
+  ssl: true
 });
 
 const Professor = sequelize.define(
-  'professores',
+  'professor',
   {
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     email: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    lastSeen: {
+    lastseen: {
       type: Sequelize.DATE
     }
   },
   {
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: false
   }
 );
 
