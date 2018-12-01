@@ -1,0 +1,33 @@
+{
+  "name": "elifinho-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Anderson Jr.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanwille/nodejs-hapi-crud/issues"
+  },
+  "homepage": "andersonmfjr.com",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "boom": "^7.3.0",
+    "config": "^3.0.0",
+    "hapi": "^17.8.1",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
+    "ramda": "^0.26.1",
+    "sequelize": "^4.41.2"
+  }
+}
