@@ -8,7 +8,7 @@ const { addRoutes } = require('./routes');
 const port = +process.env.PORT || config.port;
 const server = Hapi.server({
   port: port,
-  host: 'localhost'
+  host: process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost'
 });
 
 const init = async () => {
